@@ -4,8 +4,11 @@ import Onboarding from "@/components/Onboarding";
 import { formatCurrency, cn } from "@/lib/utils";
 import { isSameDay, isSameWeek } from "@/lib/dateUtils";
 import { ArrowDown, ArrowUp, Wallet, Target, PiggyBank, AlertCircle, Zap, PlusCircle, BarChart3 } from "lucide-react";
+import { Outfit } from "next/font/google";
 import Link from "next/link";
 import ClientTransactionList from "@/components/ClientTransactionList";
+
+const outfit = Outfit({ subsets: ["latin"] });
 
 
 
@@ -63,9 +66,12 @@ export default async function Home() {
       {/* --- MOBILE VIEW --- */}
       <div className="md:hidden">
         {/* Neon Green Top Background */}
-        <div className="absolute top-0 left-0 right-0 h-[40vh] bg-gradient-to-br from-primary via-primary to-[#85a600] z-0 rounded-b-[40px] px-6 pt-10">
-          <div className="flex items-center text-black/90">
-            <span className="font-bold text-lg tracking-tight">Expense Tracker</span>
+        <div className="absolute top-0 left-0 right-0 h-[40vh] bg-gradient-to-br from-primary via-primary to-[#85a600] z-0 rounded-b-[40px] px-6 pt-12">
+          <div className="flex flex-col text-black/90">
+            <span className="text-sm font-medium opacity-70 mb-1 tracking-wide">Expense Tracker</span>
+            <h1 className={cn("text-3xl font-bold tracking-tight leading-none", outfit.className)}>
+              Hi, <br />Binoj Charuka
+            </h1>
           </div>
         </div>
 
