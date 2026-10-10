@@ -18,12 +18,15 @@ export default async function Home() {
 
   const transactions = await getTransactions();
 
-  const today = new Date();
+  const d = new Date();
+  const formatter = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Colombo', year: 'numeric', month: '2-digit', day: '2-digit' });
+  const todayStr = formatter.format(d);
+  
   const todayTransactions = transactions
-    .filter(t => isSameDay(new Date(t.date), today) && (t.type === 'expense' || t.type === 'income'))
+    .filter(t => t.date === todayStr && (t.type === 'expense' || t.type === 'income'))
     .sort((a, b) => b.timestamp - a.timestamp);
     
-  const thisWeekTransactions = transactions.filter(t => isSameWeek(new Date(t.date), today));
+  const thisWeekTransactions = transactions.filter(t => isSameWeek(new Date(t.date), new Date(todayStr)));
 
   let totalIncome = 0;
   let totalExpenses = 0;

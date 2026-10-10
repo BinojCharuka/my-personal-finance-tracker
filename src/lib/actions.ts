@@ -1,13 +1,14 @@
 "use server";
 
 import { neon } from '@neondatabase/serverless';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, unstable_noStore as noStore } from 'next/cache';
 
 function getDb() {
   return neon(process.env.DATABASE_URL!);
 }
 
 export async function getSettings() {
+  noStore();
   const sql = getDb();
   const res = await sql`SELECT * FROM user_settings WHERE id = 1`;
   if (res.length === 0) return null;
@@ -36,6 +37,7 @@ export async function completeOnboarding(data: { startingBalance: number, weekly
 }
 
 export async function getTransactions() {
+  noStore();
   const sql = getDb();
   const res = await sql`SELECT *, date::date::text as date_str FROM transactions ORDER BY created_at DESC`;
   return res.map(t => ({
