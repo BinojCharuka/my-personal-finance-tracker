@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import SmoothScroll from "@/components/SmoothScroll";
+import RealtimeRefresher from "@/components/RealtimeRefresher";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-[#0a0a0a] text-zinc-100 antialiased pb-20 md:pb-0 md:pl-64`}>
+        <RealtimeRefresher />
         <SmoothScroll>
           <Navigation />
           <main className="max-w-5xl mx-auto min-h-screen">
