@@ -10,16 +10,16 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "My Expense Tracker",
   description: "A lightweight personal student money tracker.",
-  manifest: "/manifest.json",
+  manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: "Expense Tracker",
   }
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -32,7 +32,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="apple-touch-icon" href="/icon.svg" />
+      </head>
       <body className={`${inter.className} bg-[#0a0a0a] text-zinc-100 antialiased pb-20 md:pb-0 md:pl-64`}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js');
+                });
+              }
+            `,
+          }}
+        />
         <RealtimeRefresher />
         <SmoothScroll>
           <Navigation />
